@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Tactsoft.Core.Entities.Lesson>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">@ViewData["Title"] List</h3>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Create">
+                            <i class="fa-regular fa-pen-to-square"></i> Add New
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*                    <div class="row mb-2">
+                    <label asp-for="(model => model.CourseId)" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                    <select asp-for="(model => model.CourseId)" class="form-control" asp-items="ViewBag.CourseId">
+                    <option value="">Select Department</option>
+                    </select>
+                    <span asp-validation-for="(model => model.CourseId)" class="text-danger"></span>
+                    </div>
+                    </div>*@
+
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <select id="CourseList" asp-items="@(ViewBag.CourseId)" class="form-control">
+                                <option value="">----- Select Course -----</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @*    @Html.DropDownList("CourseList", (IEnumerable<SelectListItem>)ViewBag.CourseId,
+                    "Select Course")*@
+
+                    <table id="" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LessonNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LessonName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LessonPdf)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CourseId)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="LessonId">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<partial name="~/Views/UIComponents/_bootstrapAlert.cshtml" />
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": true,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $(document).ready(function () {
+            $('body').on('change', '#CourseList', function () {
+                var courseId = $(this).val();
+                LoadCourse(courseId)
+            })
+
+            function LoadCourse(courseId) {
+                var $state = $('#LessonId');
+                $.ajax({
+                    type: "get",
+                    url: "/Common/GetLessonByCourse",
+                    data: { courseId: courseId },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        console.log(data)
+                        var lesson = "<table id='LessonId' class='table table - bordered table - striped'>";
+                        lesson = lesson + '';
+                        for (var i = 0; i < data.length; i++) {
+                            lesson += "<tr>";
+                            lesson = lesson + '<td> ' + data[i].lessonNumber + '</td>';
+                            lesson = lesson + '<td> ' + data[i].lessonName + '</td>';
+                            lesson = lesson + '<td> ' + `<a href="images/LessonPdf/${data[i].lessonPdf}"}>` + 'Download' + '</a>' + '</td > ';
+                lesson = lesson + '<td> ' + data[i].courseName + '</td>';
+                            lesson += "</tr>";
+                        }
+                        lesson = lesson + '</table>';
+                        $('#LessonId').html(lesson);
+                    }
+                });
+            }
+        })
+    </script>
+}

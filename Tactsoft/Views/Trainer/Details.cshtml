@@ -1,0 +1,133 @@
+﻿@model Tactsoft.Core.Entities.Trainer
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Student Details Details</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.TrainerName)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.TrainerName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.AboutTrainer)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.AboutTrainer)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.DateOfBirth)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.JoiningDate)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.JoiningDate)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Address)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Phone)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Phone)
+                                </dd>
+
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.LastAcademicInfo)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.LastAcademicInfo)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Experience)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Experience)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Expertise)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Expertise)
+                                </dd>
+
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.CV)
+                                </dt>
+                                <dd class="col-md-9">
+                                    <a target="_blank" href="~/images/cv/@Html.DisplayFor(model => model.CV)">Download</a>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Picture)
+                                </dt>
+                                <dd class="col-md-9">
+                                    <img src="~/images/trainer/@Html.DisplayFor(model => model.Picture)" alt="Image" width="200" class="img-thumbnail" />
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+
+                        <a class="btn btn-outline-danger btn-sm mr-2" asp-action="Index">
+                            <i class="far fa-window-close"></i> Cancel
+                        </a>
+                        <a class="btn btn-outline-primary btn-sm me-3" asp-action="Edit" asp-route-id="@Model?.Id">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

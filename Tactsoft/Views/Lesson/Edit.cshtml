@@ -1,0 +1,86 @@
+﻿@model Tactsoft.Core.Entities.Lesson
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content  m-auto w-75">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+
+                    <h3 class="card-title">Update New Lesson</h3>
+
+                </div>
+                <form asp-action="Edit" enctype="multipart/form-data">
+
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="LessonNumber" class="control-label"></label>
+                            <input type="number" asp-for="LessonNumber" class="form-control" />
+                            <span asp-validation-for="LessonNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LessonName" class="control-label"></label>
+                            <input type="text" asp-for="LessonName" class="form-control" />
+                            <span asp-validation-for="LessonName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LessonPdf" class="control-label"></label>
+                            <input type="file" asp-for="LessonPdf" class="form-control" name="pdfFile" accept="pdf/*" id="FileUpload" onchange="PreviewFile()" />
+
+                            <span asp-validation-for="LessonPdf" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CourseId" class="control-label"></label>
+                                <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                                    <option value="">Select Course</option>
+                                </select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-footer">
+                        <div style="text-align:end">
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Index">
+                                <i class="far fa-window-close"></i> Cancel
+                            </a>
+                            <button type="submit" value="Create" class="btn btn-outline-primary btn-sm">
+                                <i class="far fa-save"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

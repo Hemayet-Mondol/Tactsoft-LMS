@@ -1,0 +1,117 @@
+﻿@model Tactsoft.Core.ViewModel.AttendenceModel
+
+@{
+    ViewData["Title"] = "Take Attendence";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 0;
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Employee Attendence</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Attendence" asp-action="TakeAttendence">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Course</label>
+                                    <select asp-for="CourseId" asp-items="@(ViewBag.CourseId)" class="form-control">
+                                        <option value="">----- Select Course -----</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Batch</label>
+                                    <select asp-for="BatchId" asp-items="@(ViewBag.BatchId)" class="form-control">
+                                        <option value="">----- Select Batch -----</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="AttendenceDate"></label>
+                                    <input type="date" class="form-control form-control-sm" asp-for="AttendenceDate" min="@(DateTime.Now.ToString("yyyy-MM-dd"))" max="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
+                                    <span asp-validation-for="AttendenceDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <br />
+                                <input class="btn btn-primary mt-2 btn-sm" type="submit" value="Search Employee" />
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (Model.AttendenceList != null)
+                    {
+                        <form method="post" action="SaveAttendence">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Employeee</th>
+                                        <th>
+                                            IsPresent
+                                            <input type="checkbox" id="checkAll" value="Check All" />
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AttendenceList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.Name
+                                                <input type="hidden" name="AttendenceList[@i].AttendenceId" value="@item.AttendenceId" />
+                                                <input type="hidden" name="AttendenceList[@i].StudentId" value="@item.StudentId" />
+                                                <input type="hidden" asp-for="AttendenceDate" />
+                                                <input type="hidden" asp-for="BatchId" />
+
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.IsPresent" type="checkbox" name="AttendenceList[@i].IsPresent" />
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="col-md-offset-3 col-md-4">
+                                <button type="submit" class="btn btn-success btn-sm"> Save Changes</button>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <script>
+        $("#checkAll").click(function () {
+            $('input:checkbox').not(this).prop('checked', this.checked);
+        });
+    </script>
+}

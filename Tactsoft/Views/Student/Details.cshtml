@@ -1,0 +1,200 @@
+﻿@model Tactsoft.Core.Entities.Student
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Student Details Details</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.StudentName)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.StudentName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.StudentId)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.StudentId)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.CourseId)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Course.CourseName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.BatchId)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Batch.BatchName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.FathersName)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.FathersName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.MothersName)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.MothersName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.GuardianName)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.GuardianName)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.StudentEmail)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.StudentEmail)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.StudentPhone)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.StudentPhone)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.GenderId)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.GenderId)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.DateOfBirth)
+                                </dd>
+                                <dt class="col-md-3">
+                                    Education
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayNameFor(model => model.Ssc)
+                                    @Html.DisplayFor(model => model.Ssc)
+                                    @Html.DisplayNameFor(model => model.Hsc)
+                                    @Html.DisplayFor(model => model.Hsc)
+                                    @Html.DisplayNameFor(model => model.Bsc)
+                                    @Html.DisplayFor(model => model.Bsc)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.LastAcademicInfo)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.LastAcademicInfo)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.NameOfInstitute)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.NameOfInstitute)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.NationalId)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.NationalId)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.EnrollmentDate)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.EnrollmentDate)
+                                </dd>
+
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Address)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Country)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.Country.Name)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.State)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.State.Name)
+                                </dd>
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.City)
+                                </dt>
+                                <dd class="col-md-9">
+                                    @Html.DisplayFor(model => model.City.Name)
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl class="row">
+                                <dt class="col-md-3">
+                                    @Html.DisplayNameFor(model => model.Picture)
+                                </dt>
+                                <dd class="col-md-9">
+                                    <img src="~/images/students/@Html.DisplayFor(model => model.Picture)" alt="Image" width="200" class="img-thumbnail" />
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end">
+
+                        <a class="btn btn-outline-danger btn-sm mr-2" asp-action="Index">
+                            <i class="far fa-window-close"></i> Cancel
+                        </a>
+                        <a class="btn btn-outline-primary btn-sm me-3" asp-action="Edit" asp-route-id="@Model?.Id">
+                            <i class="fa-regular fa-pen-to-square"></i> Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,149 @@
+﻿@model Tactsoft.Core.Entities.Batch
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Update Batch Information</h3>
+                </div>
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="row mb-2">
+                                    <label asp-for="BatchName" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <input asp-for="BatchName" class="form-control" />
+                                        <span asp-validation-for="BatchName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="BatchNumber" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <input asp-for="BatchNumber" class="form-control" />
+                                        <span asp-validation-for="BatchNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="Slote" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9 pt-2">
+                                        <input asp-for="Slote" class="form-control" />
+                                        <span asp-validation-for="Slote" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                 <div class="row mb-2">
+                                    <label asp-for="BatchStatus" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <input asp-for="BatchStatus" class="form-control" />
+                                        <span asp-validation-for="BatchStatus" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="StartDate" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9 pt-2">
+                                        <input asp-for="StartDate" class="form-control" />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="EndDate" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9 pt-2">
+                                        <input asp-for="EndDate" class="form-control" />
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="Remarks" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <textarea rows="4" asp-for="Remarks" class="form-control"></textarea>
+                                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                 <div class="row mb-2">
+                                    <label asp-for="CourseId" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <select asp-for="CourseId" asp-items="@(ViewBag.CourseId)" class="form-control">
+                                            <option value="">Select Course</option>
+                                        </select>
+                                        <span asp-validation-for="CourseId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-2">
+                                    <label asp-for="ClassRoomId" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <select asp-for="ClassRoomId" asp-items="@(ViewBag.ClassRoomId)" class="form-control">
+                                            <option value="">Select ClassRoom</option>
+                                        </select>
+                                        <span asp-validation-for="ClassRoomId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="TrainerId" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <select asp-for="TrainerId" asp-items="@(ViewBag.TrainerId)" class="form-control">
+                                            <option value="">Select Trainer Name</option>
+                                        </select>
+                                        <span asp-validation-for="TrainerId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label asp-for="VenueId" class="col-md-3 col-form-label"></label>
+                                    <div class="col-md-9">
+                                        <select asp-for="VenueId" asp-items="@(ViewBag.VenueId)" class="form-control">
+                                            <option value="">Select Venue Name</option>
+                                        </select>
+                                        <span asp-validation-for="VenueId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div style="text-align:end">
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Index">
+                                <i class="far fa-window-close"></i> Cancel
+                            </a>
+                            <button type="submit" value="Create" class="btn btn-outline-primary btn-sm">
+                                <i class="fa-solid fa-rotate"></i> Update
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

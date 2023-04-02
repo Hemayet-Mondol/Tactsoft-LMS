@@ -1,0 +1,275 @@
+﻿
+@model IEnumerable<Tactsoft.Core.Entities.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">@ViewData["Title"] List</h3>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Create">
+                            <i class="fa-regular fa-pen-to-square"></i> Add New
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*                    <div class="row mb-2">
+                    <label asp-for="(model => model.CourseId)" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                    <select asp-for="(model => model.CourseId)" class="form-control" asp-items="ViewBag.CourseId">
+                    <option value="">Select Department</option>
+                    </select>
+                    <span asp-validation-for="(model => model.CourseId)" class="text-danger"></span>
+                    </div>
+                    </div>*@
+
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <select id="CourseId" asp-items="@(ViewBag.CourseId)" class="form-control">
+                                <option value="">----- Select Course -----</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <select id="BatchId" asp-items="@(ViewBag.BatchId)" class="form-control">
+                                <option value="">----- Select Batch -----</option>
+                            </select>
+                        </div>
+                    </div>
+                 @*   <div class="row mb-2">
+                        <label asp-for="CourseId" class="col-md-3 col-form-label"></label>
+                        <div class="col-md-9">
+                            <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                                <option value="">Select Course Name</option>
+                            </select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label asp-for="BatchId" class="col-md-3 col-form-label"></label>
+                        <div class="col-md-9">
+                            <select asp-for="BatchId" class="form-control" asp-items="ViewBag.BatchId">
+                                <option value="">Select Batch Name</option>
+                            </select>
+                            <span asp-validation-for="BatchId" class="text-danger"></span>
+                        </div>
+                    </div>*@
+
+                    @*    @Html.DropDownList("CourseList", (IEnumerable<SelectListItem>)ViewBag.CourseId,
+                    "Select Course")*@
+
+                    <table id="" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentEndDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BatchId)
+                                </th>
+                                <th>
+                                    Assignment Details
+                                </th>
+                                <th>
+                                    Assignment Details
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="AssignmentId">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<partial name="~/Views/UIComponents/_bootstrapAlert.cshtml" />
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": true,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $(document).ready(function () {
+            $('body').on('change', '#BatchId', function () {
+                var batchId = $(this).val();
+                LoadAssignment(batchId)
+            })
+
+            function LoadAssignment(batchId) {
+                var $state = $('#AssignmentId');
+                $.ajax({
+                    type: "get",
+                    url: "/Common/GetAssignmentByBatch",
+                    data: { batchId: batchId },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        console.log(data)
+                        var lesson = "<table id='AssignmentId' class='table table - bordered table - striped'>";
+                        lesson = lesson + '';
+                        for (var i = 0; i < data.length; i++) {
+                            lesson += "<tr>";
+                            lesson = lesson + '<td> ' + data[i].assingmentName + '</td>';
+                            lesson = lesson + '<td> ' + data[i].assingmentDate + '</td>';
+                            lesson = lesson + '<td> ' + data[i].assingmentEndDate + '</td>';
+                            lesson = lesson + '<td> ' + data[i].batchId + '</td>';
+                            lesson = lesson + '<td> ' +`<a href="AssignmentDetails/Details/${data[i].id}"> Details </a>` + '</td>';
+                            lesson = lesson + '<td> ' + `<a href="Assingment/Details/${data[i].id}"> Details </a>` + '</td>';
+                            lesson += "</tr>";
+                        }
+                        lesson = lesson + '</table>';
+                        $('#AssignmentId').html(lesson);
+                    }
+                });
+            }
+        })
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+@*@model IEnumerable<Tactsoft.Core.Entities.Assignment>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3 class="m-0">@ViewData["Title"]</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">@ViewData["Title"] List</h3>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Create">
+                            <i class="fa-regular fa-pen-to-square"></i> Add New
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentEndDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AssingmentPdf)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Remarks)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BatchId)
+                                </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AssingmentName)
+                                    </td>
+                                      <td>
+                                        @Html.DisplayFor(modelItem => item.AssingmentDate)
+                                    </td>
+                                      <td>
+                                        @Html.DisplayFor(modelItem => item.AssingmentEndDate)
+                                    </td>
+                                      <td>
+                                        @Html.DisplayFor(modelItem => item.AssingmentPdf)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Remarks)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Batch.BatchName)
+                                    </td>
+                                    <td style="width:90px;text-align:center">
+                                        @Html.ActionLink("", "Edit", new { id = item.Id }, new { @class = "fa-regular fa-pen-to-square", @style = "color:green" }) |
+                                        @Html.ActionLink("", "Details", new { id = item.Id }, new { @class = "fa-regular fa-eye", @style = "color:blue" }) |
+                                        @Html.ActionLink("", "Delete", new { id = item.Id }, new { @class = "fa-regular fa-trash-can", @style = "color:red" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<partial name="~/Views/UIComponents/_bootstrapAlert.cshtml" />
+@section Styles{
+    <link href="~/lib/flag-icon-css/css/flag-icons.css" rel="stylesheet" />
+    <link href="~/lib/flag-icon-css/css/flag-icons.min.css" rel="stylesheet" />
+}
+*@

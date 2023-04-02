@@ -1,0 +1,43 @@
+﻿@model Tactsoft.Core.Entities.User
+<div class="login-section">
+	<div class="col-md-12">
+		<div class="row">
+			<div class="login-body">
+				<div class="login-img">
+					<img src="~/assets/img/undraw_studying_re_deca.svg" class="img-fluid" alt="Login">
+				</div>
+				<h3 class="text-center mt-4">Login</h3>
+				<p class="text-center">Lorem, ipsum, dolor sit amet consectetur</p>
+				<form action="">
+
+					<div class="form-floating mb-3">
+						<div class="form-check form-check-inline pb-4">
+							<input type="radio" class="form-radio-input" asp-for="UserTypeId" />
+							<label asp-for="UserTypeId" class="form-check-label me-2"></label>
+						</div>
+					</div>
+					
+					<div class="form-floating mb-3">
+						<input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+						<label for="floatingInput">Email address</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+						<label for="floatingPassword">Password</label>
+					</div>
+					<div class="mb-3 d-flex justify-content-around">
+						<div class="forgotten">
+							<a href="#">Forgot Password?</a>
+						</div>
+						<div class="create-account">
+							<a href="#">Create New Account</a>
+						</div>
+					</div>
+					<div class="mb-3">
+						<button class="btn btn-primary login-btn">Sign In</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

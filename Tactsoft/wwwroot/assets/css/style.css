@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/*
+Login Start
+=====================================*/
+.login-section{
+    width: 100%;
+    padding: 40px 0px;
+    overflow-x: hidden;
+}
+.login-section .login-body{
+    width: 32%;
+    margin: auto;
+    padding: 20px 20px;
+    border-style: solid;
+    border-color: #E4E4E4;
+    border-width: 1px;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login-section .login-body .login-img{
+    width: 100%;
+    text-align: center;
+}
+.login-section .login-body .login-img img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+.login-section .login-body h3{
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+.login-section .login-body p{
+    color: #6A6868;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+.login-section .login-body form input{
+
+}
+.login-section .login-body form .forgotten a{
+    text-decoration: none;
+    color: #6A6868;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+.login-section .login-body form .forgotten a:hover{
+    text-decoration: underline;
+}
+.login-section .login-body form .create-account a{
+    text-decoration: none;
+    color: #6A6868;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+.login-section .login-body form .create-account a:hover{
+    text-decoration: underline;
+}
+.login-section .login-body form .login-btn{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: auto;
+    background-color: #272727;
+    border-style: solid;
+    border-color: #272727;
+    border-radius: 4px;
+}
+.login-section .login-body form .login-btn:hover{
+    background-color: black;
+    transition: .6s ease-in-out;
+}
+/*
+Login End
+=====================================*/
+
+
+

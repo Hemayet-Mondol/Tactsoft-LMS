@@ -1,0 +1,152 @@
+﻿@model IEnumerable<Tactsoft.Core.Entities.Student>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">@ViewData["Title"] List</h3>
+                        <a class="btn btn-outline-primary btn-sm" asp-action="Create">
+                            <i class="fa-regular fa-pen-to-square"></i> Add New
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @*                    <div class="row mb-2">
+                    <label asp-for="(model => model.CourseId)" class="col-md-3 col-form-label"></label>
+                    <div class="col-md-9">
+                    <select asp-for="(model => model.CourseId)" class="form-control" asp-items="ViewBag.CourseId">
+                    <option value="">Select Department</option>
+                    </select>
+                    <span asp-validation-for="(model => model.CourseId)" class="text-danger"></span>
+                    </div>
+                    </div>*@
+
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <select id="CourseId" asp-items="@(ViewBag.CourseId)" class="form-control">
+                                <option value="">----- Select Course -----</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <select id="BatchId" asp-items="@(ViewBag.BatchId)" class="form-control">
+                                <option value="">----- Select Batch -----</option>
+                            </select>
+                        </div>
+                    </div>
+                 @*   <div class="row mb-2">
+                        <label asp-for="CourseId" class="col-md-3 col-form-label"></label>
+                        <div class="col-md-9">
+                            <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                                <option value="">Select Course Name</option>
+                            </select>
+                            <span asp-validation-for="CourseId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label asp-for="BatchId" class="col-md-3 col-form-label"></label>
+                        <div class="col-md-9">
+                            <select asp-for="BatchId" class="form-control" asp-items="ViewBag.BatchId">
+                                <option value="">Select Batch Name</option>
+                            </select>
+                            <span asp-validation-for="BatchId" class="text-danger"></span>
+                        </div>
+                    </div>*@
+
+                    @*    @Html.DropDownList("CourseList", (IEnumerable<SelectListItem>)ViewBag.CourseId,
+                    "Select Course")*@
+
+                    <table id="" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StudentName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StudentEmail)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.StudentPhone)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BatchId)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="StudentId">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<partial name="~/Views/UIComponents/_bootstrapAlert.cshtml" />
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": true,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $(document).ready(function () {
+            $('body').on('change', '#BatchId', function () {
+                var batchId = $(this).val();
+                LoadStudent(batchId)
+            })
+
+            function LoadStudent(batchId) {
+                var $state = $('#StudentId');
+                $.ajax({
+                    type: "get",
+                    url: "/Common/GetStudentByBatch",
+                    data: { batchId: batchId },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        console.log(data)
+                        var lesson = "<table id='StudentId' class='table table - bordered table - striped'>";
+                        lesson = lesson + '';
+                        for (var i = 0; i < data.length; i++) {
+                            lesson += "<tr>";
+                            lesson = lesson + '<td> ' + data[i].studentName + '</td>';
+                            lesson = lesson + '<td> ' + data[i].studentEmail + '</td>';
+                            lesson = lesson + '<td> ' + data[i].studentPhone + '</td>';
+                            lesson = lesson + '<td> ' + data[i].batchId + '</td>';
+                            lesson += "</tr>";
+                        }
+                        lesson = lesson + '</table>';
+                        $('#StudentId').html(lesson);
+                    }
+                });
+            }
+        })
+    </script>
+}

@@ -1,0 +1,105 @@
+﻿@model Tactsoft.Core.Entities.Assignment
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h4 class="m-0">@ViewData["Title"]</h4>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content  m-auto w-75">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Add New Assignment</h3>
+                </div>
+                <form asp-action="Create" enctype="multipart/form-data">
+
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="AssingmentName" class="control-label"></label>
+                            <input type="text" asp-for="AssingmentName" class="form-control" />
+                            <span asp-validation-for="AssingmentName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AssingmentDate" class="control-label"></label>
+                            
+                                <input asp-for="AssingmentDate" class="form-control" />
+                                <span asp-validation-for="AssingmentDate" class="text-danger"></span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AssingmentEndDate" class="control-label"></label>
+                            
+                                <input asp-for="AssingmentEndDate" class="form-control" />
+                                <span asp-validation-for="AssingmentEndDate" class="text-danger"></span>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AssingmentPdf" class="control-label"></label>
+                            <input type="file" asp-for="AssingmentPdf" class="form-control" name="pdfFile" accept="pdf/*" id="FileUpload" onchange="PreviewFile()" />
+
+                            <span asp-validation-for="AssingmentPdf" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            
+                                <label asp-for="CourseId" class="control-label"></label>
+                                
+                                    <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId">
+                                        <option value="">Select Course Name</option>
+                                    </select>
+                                    <span asp-validation-for="CourseId" class="text-danger"></span>
+                                
+                           
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BatchId" class="control-label"></label>
+
+                            <select asp-for="BatchId" class="form-control" asp-items="ViewBag.BatchId">
+                                <option value="">Select Course</option>
+                            </select>
+                            <span asp-validation-for="BatchId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Remarks" class="control-label"></label>
+                            <input type="text" asp-for="Remarks" class="form-control" />
+                            <span asp-validation-for="Remarks" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div style="text-align:end">
+                            <a class="btn btn-outline-danger btn-sm" asp-action="Index">
+                                <i class="far fa-window-close"></i> Cancel
+                            </a>
+                            <button type="submit" value="Create" class="btn btn-outline-primary btn-sm">
+                                <i class="far fa-save"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

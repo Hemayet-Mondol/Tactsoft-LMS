@@ -1,0 +1,10 @@
+1- Add new model in Entities folder
+2- Add Configuration file in EntityConfigurations folder
+3- Add models in AppDbContext file 
+4- Add Table data in the DbSeeder file(Not necessary)
+5- Now add migration
+
+6- Add new service and interface in the service folder
+7- Add service dependency in the service service dependency file. 
+8- Add new controllers in the controller folder
+9- 
